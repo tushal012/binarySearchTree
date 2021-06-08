@@ -21,12 +21,21 @@ public class BinarySearchTree<K extends Comparable<K>> {
         return current;
     }
 
-    public int getSize() {
-        return this.getSizeRecursive(root);
+    public Boolean search(K key) {
+        return this.searchRecursively(root, key);
     }
 
-    private int getSizeRecursive(Node<K> current) {
-        return current == null ? 0 : 1 + this.getSizeRecursive(current.left) +
-                this.getSizeRecursive(current.right);
+    private Boolean searchRecursively(Node<K> current, K key) {
+        if (current == null) return false;
+        int compareResult = key.compareTo(current.key);
+        if (compareResult == 0) return true;
+        if (compareResult < 0) {
+            return searchRecursively(current.left, key);
+        } else {
+            return searchRecursively(current.right, key);
+        }
+    }
+
+    public K getSize() {
     }
 }
